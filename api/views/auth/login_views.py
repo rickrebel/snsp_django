@@ -1,6 +1,6 @@
 from api.views.auth import serializers
 # from django.contrib.auth.models import User
-from ies.models import User, InvitationToken
+from user.models import User, InvitationToken
 from rest_framework.response import Response
 from rest_framework import permissions, views, status
 from api.mixins import CreateRetrieveMix
@@ -69,7 +69,7 @@ class InvitationTokenView(views.APIView):
 
     def post(self, request, **kwargs):
         from django.utils import timezone
-        from ies.models import InvitationToken
+        from user.models import InvitationToken
         from rest_framework.exceptions import PermissionDenied
         token_key = request.query_params.get("token")
         invitation_token = InvitationToken.objects\

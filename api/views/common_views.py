@@ -69,7 +69,7 @@ class BaseViewSet(CustomDeleteMixin, viewsets.ModelViewSet):
 class OrderingAutoFilter(OrderingFilter):
 
     def get_valid_fields(self, queryset, view, context={}):
-        from ies.models import StatusControl
+        from category.models import StatusControl
         valid_fields = getattr(view, 'ordering_fields', self.ordering_fields)
 
         if valid_fields is None:

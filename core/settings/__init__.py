@@ -40,14 +40,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
-
-    'ies',
-    'example',
-    'indicator',
-    'question',
-    'survey',
-    'answer',
     'ps_schema',
+
+    'user',
+    'gob',
+    'category',
+    'plus'
+    'geo',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +86,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-AUTH_USER_MODEL = 'ies.User'
+AUTH_USER_MODEL = 'user.User'
 
 
 POSTRGRESQL_DB = getenv_bool('POSTRGRESQL_DB', False)

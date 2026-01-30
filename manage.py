@@ -5,7 +5,7 @@ import sys
 
 from django.core.management.commands.runserver import Command as runserver
 
-runserver.default_port = "8016"
+runserver.default_port = "8021"
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
