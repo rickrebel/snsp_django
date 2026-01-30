@@ -5,29 +5,17 @@ from .views import health_check
 from api.views.auth.login_views import UserLoginAPIView, CheckingViewSet
 
 from api.views.ps_schemas.views import CollectionViewSet
-# from api.views.stop import StationViewSet
-# from api.views.report import StairReportViewSet, AscertainableViewSet
-
 
 router = DefaultRouter()
 
-# router.register(r'station', StationViewSet, basename='station')
-# router.register(r'stair_report', StairReportViewSet, basename='stair_report')
-# router.register(
-#     r'^stair_report/(?P<stair_report_id>[-\d]+)/evidence_image',
-#     AscertainableViewSet,
-#     basename='stair_report_evidence_image'
-# )
-# )
 router.register(r'collection', CollectionViewSet, basename='collection')
 router.register(r'validate_token', CheckingViewSet, basename='validate_token')
 
 
 urlpatterns = [
-    # path('login/', obtain_auth_token, name='api-login'),
     path('health/', health_check, name='health_check'),
     path('login/', UserLoginAPIView.as_view(), name='login'),
     path('catalogs/', include('api.views.catalogs.urls')),
-    # path('geo/', include('api.views.geo.urls')),
+    path('geo/', include('api.views.geo.urls')),
     path('', include(router.urls)),
 ]

@@ -6,7 +6,7 @@ from category.initial_data import (
     InitAgentTypes, InitPriorityGroups
 )
 from gob.initial_data import (
-    InitInstitutions, InitPrograms, InitActions
+    InitInstitutions, InitPrograms
 )
 from user.initial_data import InitRoles, InitUsers
 
@@ -32,7 +32,6 @@ class Command(BaseCommand):
         print('--- Seeding Gob data ---')
         InitInstitutions()
         InitPrograms()
-        InitActions()
         print('')
 
         # User app seeds

@@ -1,5 +1,4 @@
 from api.views.auth import serializers
-# from django.contrib.auth.models import User
 from user.models import User, InvitationToken
 from rest_framework.response import Response
 from rest_framework import permissions, views, status

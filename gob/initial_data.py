@@ -1,4 +1,4 @@
-from gob.models import Institution, Program, Action
+from gob.models import Institution, Program
 
 
 class InitInstitutions:
@@ -75,14 +75,3 @@ class InitPrograms:
 
         print('✓ Programs created/updated')
 
-
-class InitActions:
-    def __init__(self):
-        Action.objects.update_or_create(
-            name='Conferencia / Plática',
-            defaults={
-                'description': 'Actividad de sensibilización o capacitación en comunidad',
-            }
-        )
-
-        print('✓ Default Action created/updated')

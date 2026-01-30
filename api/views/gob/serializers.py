@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from gob.models import Institution, Program, Action
+from gob.models import Institution, Program
 
 
 class InstitutionSerializer(serializers.ModelSerializer):
@@ -13,8 +13,3 @@ class ProgramSerializer(serializers.ModelSerializer):
         model = Program
         fields = '__all__'
 
-
-class ActionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Action
-        fields = '__all__'
