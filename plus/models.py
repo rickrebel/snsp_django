@@ -4,7 +4,7 @@ from geo.models import (
     State, Municipality, Locality, HealthDistrict)
 from user.models import User, Agent
 from gob.models import Institution, Program
-from category.models import StatusControl, PriorityGroup, PlaceType
+from category.models import StatusControl, PriorityGroup, PlaceType, Topic
 
 
 class Community(models.Model):
@@ -179,3 +179,15 @@ class FollowUp(models.Model):
 
     def __str__(self):
         return f"Follow Up {self.id} - {self.date}"
+
+
+class TopicGoal(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    goal = models.ForeignKey(Goal, on_delete=models.CASCADE, related_name='topics_goal')
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='topic_goals')
+
+    class Meta:
+        verbose_name = 'topic_goal'
+
+    def __str__(self):
+        return f"TopicGoal {self.id}"

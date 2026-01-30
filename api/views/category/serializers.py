@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from django.contrib import admin
 from category.models import (
-    StatusControl, PlaceType, Topic, PriorityGroup, 
-    TopicGoal, AgentType
+    StatusControl, PlaceType, Topic, PriorityGroup,
+    AgentType
 )
+from plus.models import TopicGoal
 
 
 @admin.register(StatusControl)

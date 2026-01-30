@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'user',
     'gob',
     'category',
-    'plus'
+    'plus',
     'geo',
 ]
 

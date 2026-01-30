@@ -73,18 +73,6 @@ class PriorityGroup(models.Model):
         return self.name
 
 
-class TopicGoal(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True)
-    goal = models.ForeignKey('Goal', on_delete=models.CASCADE, related_name='topics_goal')
-    topic = models.ForeignKey('Topic', on_delete=models.CASCADE, related_name='topic_goals')
-
-    class Meta:
-        verbose_name = 'topic_goal'
-
-    def __str__(self):
-        return f"TopicGoal {self.id}"
-
-
 class AgentType(models.Model):
     name = models.CharField(max_length=255)
     short_name = models.CharField(max_length=100)
