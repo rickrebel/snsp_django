@@ -1,3 +1,9 @@
+# send_mail — archivos sensibles
+credentials.json
+token.json
+send_mail/asistentes.json
+send_mail/firma*.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

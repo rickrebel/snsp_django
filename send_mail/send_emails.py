@@ -17,14 +17,17 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
 
 def get_gmail_service():
-    creds = Credentials.from_authorized_user_file('send_mail/token.json', SCOPES)
-
-    # Renueva el token si expiró (el refresh_token lo hace automáticamente)
-    if creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-        with open('token.json', 'w') as f:
-            f.write(creds.to_json())
-
+    # Construye las credenciales desde variables de entorno.
+    # El access token se obtiene automáticamente vía refresh_token.
+    creds = Credentials(
+        token=None,
+        refresh_token=os.getenv('GMAIL_REFRESH_TOKEN'),
+        token_uri='https://oauth2.googleapis.com/token',
+        client_id=os.getenv('GMAIL_CLIENT_ID'),
+        client_secret=os.getenv('GMAIL_CLIENT_SECRET'),
+        scopes=SCOPES,
+    )
+    creds.refresh(Request())
     return build('gmail', 'v1', credentials=creds)
 
 

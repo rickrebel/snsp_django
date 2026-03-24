@@ -10,20 +10,20 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 def authorize():
     creds = None
 
-    if os.path.exists('token.json'):
-        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    if os.path.exists('send_mail/token.json'):
+        creds = Credentials.from_authorized_user_file('send_mail/token.json', SCOPES)
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES
+                'send_mail/credentials.json', SCOPES
             )
             # Abre el browser para que el usuario autorice
             creds = flow.run_local_server(port=8080)
 
-        with open('token.json', 'w') as token:
+        with open('send_mail/token.json', 'w') as token:
             token.write(creds.to_json())
 
     print("✅ Autorización exitosa. token.json guardado.")
