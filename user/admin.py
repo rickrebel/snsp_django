@@ -8,7 +8,7 @@ from .models import User
 class CustomUserAdmin(UserAdmin):
     model = User
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {'fields': ('phone', 'full_editor')}),
+        (None, {'fields': ('phone', 'role')}),
     )
     fieldsets = (
         (None, {'fields': ('username', 'password')}),

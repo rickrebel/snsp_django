@@ -65,7 +65,7 @@ class Goal(models.Model):
     description = models.TextField()
     health_meeting = models.ForeignKey(
         HealthMeeting, on_delete=models.CASCADE, related_name='goals')
-    status = models.ForeignKey(
+    status_goal = models.ForeignKey(
         StatusControl, on_delete=models.SET_NULL, null=True, blank=True,
         related_name='goals')
 
@@ -105,17 +105,17 @@ class IntensiveDay(models.Model):
         return f"Intensive Day {self.id} - {self.date}"
 
 
-class ProgressAdvance(models.Model):
+class Advance(models.Model):
     comment = models.TextField(null=True, blank=True)
     status_goal = models.ForeignKey(
         StatusControl, on_delete=models.SET_NULL, null=True, blank=True,
-        related_name='progress_advances')
+        related_name='advances')
     intensive_day = models.ForeignKey(
         IntensiveDay, on_delete=models.SET_NULL, null=True, blank=True,
-        related_name='progress_advances')
+        related_name='advances')
 
     class Meta:
-        verbose_name = 'progress_advance'
+        verbose_name = 'Avance en algún programa'
 
     def __str__(self):
         return f"Progress Advance {self.id}"

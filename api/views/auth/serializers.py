@@ -1,7 +1,12 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from user.models import User, InvitationToken
+from user.models import User, InvitationToken, Role
 
+
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = '__all__'
 
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=False, allow_blank=True)
@@ -14,23 +19,20 @@ class UserLoginSerializer(serializers.Serializer):
 class UserDataSerializer(serializers.ModelSerializer):
     fullname = serializers.ReadOnlyField(source="full_name")
     token = serializers.ReadOnlyField(source="auth_token.key")
-    # institution = InstitutionFullSerializer(read_only=True)
-    is_ies = serializers.SerializerMethodField()
-    is_full_editor = serializers.ReadOnlyField(source="full_editor")
-
-    def get_is_ies(self, obj):
-        return obj.institution is not None
+    # role = RoleSerializer(read_only=True)
 
     class Meta(object):
         model = User
         fields = [
             "id", 'email', 'username', "first_name", "last_name",
-            "token", "fullname", "full_editor", "is_staff",
-            "is_superuser", "institution", "is_ies", "is_full_editor"]
+            "token", "fullname", "is_staff",
+            "is_superuser", "role"
+        ]
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
+    # role = RoleSerializer(read_only=True)
 
     def get_full_name(self, obj):
         return obj.get_full_name()
@@ -45,8 +47,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
             "is_superuser",
             "first_name",
             "last_name",
-            "full_editor",
             "full_name",
+            "role"
         ]
 
 

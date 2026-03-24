@@ -87,17 +87,17 @@ class InitStatus:
         init_status = [
             # is_public, open_editor, is_deleted
             ("draft", "register", "Borrador",
-                "blue", "edit_note", False, 'ies', False, 8),
+                "blue", "edit_note", False, None, False, 8),
             ("created", "register", "Enviado (para revisarse)",
-                "green", "pending_actions", True, 'validator', False, 6),
+                "green", "pending_actions", True, None, False, 6),
             ("need_changes", "register", "Requiere cambios",
-                "orange", "new_releases", False, 'ies', False, 2),
+                "orange", "new_releases", False, None, False, 2),
             ("need_new_checking", "register", "Requiere nueva revisión",
-                "pink", "report_gmailerrorred", False, 'validator', False, 4),
+                "pink", "report_gmailerrorred", False, None, False, 4),
             ("approved", "register", "Aprobado",
-                "green", "done_all", True, 'ies', False, 16),
+                "green", "done_all", True, None, False, 16),
             ("discarded", "register", "Descartado",
-                "red", "heart_broken", True, 'ies', False, 10),
+                "red", "heart_broken", True, None, False, 10),
 
             # ("sent_to_validation", "sending", "Enviado a validación",
             #     "green", "send", False, False, False, 22),
@@ -117,7 +117,7 @@ class InitStatus:
             icon = data[4]
             is_final = data[5]
             # open_editor = data[6]
-            role = data[6]
+            # role = data[6]
             # is_deleted = data[7]
             try:
                 priority = data[8]
@@ -142,7 +142,7 @@ class InitStatus:
                 order = 40
             status.order = order
             # status.open_editor = open_editor
-            status.role = role
+            # status.role = role
             # status.is_deleted = is_deleted
             status.priority = priority
             status.description = description

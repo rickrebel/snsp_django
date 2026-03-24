@@ -48,14 +48,13 @@ class InitRoles:
             ),
         ]
 
-        for name, description, can_edit, is_admin, full_editor in initial_data:
+        for name, description, can_edit, is_admin in initial_data:
             Role.objects.update_or_create(
                 name=name,
                 defaults={
                     'description': description,
                     'can_edit': can_edit,
                     'is_admin': is_admin,
-                    'full_editor': full_editor,
                 }
             )
 

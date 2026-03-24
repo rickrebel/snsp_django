@@ -7,6 +7,7 @@ from django.utils import timezone
 from category.models import AgentType
 from geo.models import State, HealthDistrict, Municipality
 from gob.models import Institution
+# from plus.models import Community
 
 
 class Role(models.Model):
@@ -14,10 +15,10 @@ class Role(models.Model):
     description = models.TextField()
     can_edit = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    full_editor = models.BooleanField(
-        default=False, verbose_name='Es capturista',
-        help_text='Puede agregar notas, comentarios a los registros,'
-                  'pero no tiene todos los permisos')
+    can_validate = models.BooleanField(default=False)
+    can_manager_users = models.BooleanField(default=False)
+    needs_state = models.BooleanField(default=False)
+    needs_health_district = models.BooleanField(default=False)
 
 
     class Meta:
@@ -66,12 +67,6 @@ class User(AbstractUser):
     objects = UserManager()
 
     @property
-    def is_full_editor(self):
-        if self.is_anonymous:
-            return False
-        return self.is_superuser or self.is_staff or self.full_editor
-
-    @property
     def is_admin(self):
         if self.is_anonymous:
             return False
@@ -94,14 +89,23 @@ class Agent(models.Model):
     last_name2 = models.CharField(max_length=255, null=True, blank=True)
     gender = models.CharField(max_length=50, null=True, blank=True)
     phone_number = models.CharField(max_length=50, null=True, blank=True)
-    edad = models.IntegerField(null=True, blank=True)
-    state = models.ForeignKey(State, on_delete=models.SET_NULL, null=True, blank=True, related_name='agents')
-    municipality = models.ForeignKey(Municipality, on_delete=models.SET_NULL, null=True, blank=True,
-                                     related_name='agents')
-    community = models.CharField(max_length=255, null=True, blank=True)
-    agent_type = models.ForeignKey(AgentType, on_delete=models.CASCADE, related_name='agents')
-    institution = models.ForeignKey(Institution, on_delete=models.SET_NULL, null=True, blank=True,
-                                    related_name='agents')
+    email = models.EmailField(null=True, blank=True)
+    sex = models.CharField(max_length=20, null=True, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    state = models.ForeignKey(
+        State, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='agents')
+    municipality = models.ForeignKey(
+        Municipality, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='agents')
+    # community = models.ForeignKey(
+    #     Community, on_delete=models.SET_NULL, null=True, blank=True,
+    #     related_name='agents')
+    agent_type = models.ForeignKey(
+        AgentType, on_delete=models.CASCADE, related_name='agents')
+    institution = models.ForeignKey(
+        Institution, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='agents')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 

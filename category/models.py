@@ -6,10 +6,7 @@ STATUS_GROUP_CHOICES = [
     ("validation", "Validación"),
     ("goal", "Objetivo"),
 ]
-ROLE_CHOICES = [
-    ("validator", "Validador"),
-    ("ies", "Institución"),
-]
+
 
 
 class StatusControl(models.Model):
